@@ -1,0 +1,98 @@
+@import "abstracts/mixins";
+@import "abstracts/variables";
+.login-page {
+  & main {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    @include flex(row, flex-start, flex-start);
+  }
+
+  & .left-panel,
+  & .right-panel {
+    height: 100vh;
+  }
+
+  & .left-panel {
+    width: 40%;
+
+    @include flex(column, center, center);
+    & header {
+      text-align: center;
+      margin-top: -5rem;
+      & p {
+        margin-top: 0.5;
+        color: $text-color;
+      }
+    }
+    & form {
+      width: 400px;
+      margin-top: 6rem;
+      @include flex(column, flex-start, flex-start);
+    }
+    & input:not([type="checkbox"]) {
+      margin: 0.5rem 0;
+      width: 100%;
+    }
+    & input:checked {
+      background-color: $primary-color;
+    }
+    & .forgot-password {
+      margin: 1.5rem 0;
+      width: 100%;
+      @include flex(row, flex-start, center);
+      & p {
+        width: 100%;
+        margin-left: 0.5rem;
+      }
+    }
+    & button[type="submit"] {
+      width: 100%;
+      padding: 1rem;
+      background: $primary-color;
+      color: #fff;
+      font-weight: 600;
+      @include rounded-4();
+      font-size: 1rem;
+    }
+  }
+  & .right-panel {
+    width: 60%;
+
+    background: #f8f2f3;
+  }
+
+  // MEDIA QUERYS
+
+  // SCREEN UNTIL TABLET DEVICE
+  @media (max-width: $table-portrait) {
+    .right-panel {
+      display: none;
+    }
+
+    .left-panel {
+      width: 100%;
+      & h1 {
+        font-size: 1.75rem;
+      }
+
+      & form {
+        width: 90%;
+      }
+    }
+  }
+  // FROM TABLE DEVICE to DESKTOP SCREEN
+  @media screen and (min-width: $table-portrait-up) and (max-width: $desktop-portrait) {
+    .right-panel,
+    .left-panel {
+      width: 50%;
+      position: relative;
+    }
+
+    .left-panel {
+      & form {
+        width: 85%;
+      }
+    }
+  }
+}
