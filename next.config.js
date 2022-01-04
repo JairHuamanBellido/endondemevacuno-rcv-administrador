@@ -6,6 +6,9 @@ module.exports = {
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
   },
+  images: {
+    domains: ["endondemevacuno.s3.us-east-2.amazonaws.com"],
+  },
   ...withPWA({
     pwa: {
       dest: "public",

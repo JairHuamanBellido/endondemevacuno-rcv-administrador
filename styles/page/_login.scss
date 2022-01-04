@@ -1,5 +1,3 @@
-@import "abstracts/mixins";
-@import "abstracts/variables";
 .login-page {
   & main {
     width: 100%;
@@ -11,23 +9,33 @@
   & .left-panel,
   & .right-panel {
     height: 100vh;
+    position: relative;
   }
 
   & .left-panel {
     width: 40%;
-
-    @include flex(column, center, center);
+    padding: 4rem;
+    @include flex(column, flex-start, flex-start);
     & header {
-      text-align: center;
-      margin-top: -5rem;
+      @include flex(row, flex-start, center);
+      & h1 {
+        color: $primary-color;
+      }
+    }
+    & .title-container {
+      margin: 5rem 0;
+      & h3 {
+        font-size: 2rem;
+        color: $secondary-color;
+        margin-bottom: 0.5rem;
+      }
       & p {
-        margin-top: 0.5;
+        font-size: 1rem;
         color: $text-color;
       }
     }
     & form {
-      width: 400px;
-      margin-top: 6rem;
+      width: 100%;
       @include flex(column, flex-start, flex-start);
     }
     & input:not([type="checkbox"]) {
@@ -58,13 +66,14 @@
   }
   & .right-panel {
     width: 60%;
-
-    background: #f8f2f3;
+    background: $primary-color;
+    @include flex(row, center, center);
   }
 
   // MEDIA QUERYS
 
   // SCREEN UNTIL TABLET DEVICE
+
   @media (max-width: $table-portrait) {
     .right-panel {
       display: none;
@@ -72,26 +81,39 @@
 
     .left-panel {
       width: 100%;
-      & h1 {
-        font-size: 1.75rem;
+      padding: 2rem;
+      & .title-container {
+        margin: 2rem 0;
       }
-
+      & header h1,
+      & .title-container h3 {
+        font-size: 1.5rem;
+      }
       & form {
-        width: 90%;
+        width: 100%;
       }
+    }
+  }
+
+  @media (max-width: $phone-portrait) {
+    .left-panel {
+      padding: 1rem;
     }
   }
   // FROM TABLE DEVICE to DESKTOP SCREEN
   @media screen and (min-width: $table-portrait-up) and (max-width: $desktop-portrait) {
-    .right-panel,
-    .left-panel {
-      width: 50%;
-      position: relative;
+    .right-panel {
+      display: none;
     }
 
     .left-panel {
+      width: 100%;
+      & header h1,
+      & .title-container h3 {
+        font-size: 1.5rem;
+      }
       & form {
-        width: 85%;
+        width: 100%;
       }
     }
   }

@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import FormLogin from "../src/module/Login/FormLogin";
+import Image from "next/image";
+import FormLogin from "../src/module/Login/Application/FormLogin";
 
 const Login: NextPage = () => {
   return (
@@ -11,13 +12,29 @@ const Login: NextPage = () => {
       </Head>
       <main className=" login-container">
         <div className="left-panel">
-          <header className="head">
+          <header>
+            <Image
+              width={64}
+              height={64}
+              src="/icon.svg"
+              alt="En Donde Me Vacuno"
+            />
             <h1>En Donde Me Vacuno</h1>
-            <p>Gestiona tu centor de vacunación</p>
           </header>
+          <div className="title-container">
+            <h3>Login</h3>
+            <p>Ingrese sus credenciales</p>
+          </div>
           <FormLogin />
         </div>
-        <div className="right-panel"></div>
+        <div className="right-panel">
+          <Image
+            width={779}
+            height={595.81}
+            src="https://endondemevacuno.s3.us-east-2.amazonaws.com/panel-login-illustration.png"
+            alt="image"
+          />
+        </div>
       </main>
     </div>
   );
