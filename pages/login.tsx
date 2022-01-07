@@ -19,10 +19,10 @@ const Login: NextPage = () => {
               src="/icon.svg"
               alt="En Donde Me Vacuno"
             />
-            <h1>En Donde Me Vacuno</h1>
+            <h1 className="font-bold text-3xl">En Donde Me Vacuno</h1>
           </header>
           <div className="title-container">
-            <h3>Login</h3>
+            <h3 className="font-medium">Login</h3>
             <p>Ingrese sus credenciales</p>
           </div>
           <FormLogin />
