@@ -1,3 +1,5 @@
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { HttpError } from "../../../core/types/HttpError";
 import { ErrorContainer, Spinner } from "../../../shared";
@@ -9,6 +11,13 @@ export default function FormLogin() {
     useForm<HttpRestApiAuthenticationRequest>();
   const { mutate, isLoading, isError, isSuccess, error } = useAuthentication();
 
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isSuccess) {
+      router.replace("/create-vaccine-center");
+    }
+  }, [isSuccess, router]);
   const onSubmit = (data: HttpRestApiAuthenticationRequest) => {
     mutate(data);
   };

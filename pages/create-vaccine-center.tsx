@@ -1,8 +1,26 @@
 import { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import Container from "../src/module/CreateVaccineCenter/Application/components/Main";
+import useIsValidForCreate from "../src/module/CreateVaccineCenter/Application/hooks/useIsValidForCreate";
+import { Spinner } from "../src/shared";
 const CreateVaccineCneter: NextPage = () => {
+  const { isLoading, isSuccess } = useIsValidForCreate();
+  const router = useRouter();
+  useEffect(() => {
+    if (isSuccess) {
+      router.replace("/");
+    }
+  }, [isSuccess, router]);
+  if (isLoading)
+    return (
+      <div className="w-screen h-screen flex flex-col items-center justify-center">
+        <p className="text-gray-400 mb-4">Validando datos</p>
+        <Spinner />
+      </div>
+    );
   return (
     <div>
       <Head>
