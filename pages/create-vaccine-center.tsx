@@ -7,13 +7,14 @@ import Container from "../src/module/CreateVaccineCenter/Application/components/
 import useIsValidForCreate from "../src/module/CreateVaccineCenter/Application/hooks/useIsValidForCreate";
 import { Spinner } from "../src/shared";
 const CreateVaccineCneter: NextPage = () => {
-  const { isLoading, isSuccess } = useIsValidForCreate();
+  const { isLoading, data } = useIsValidForCreate();
   const router = useRouter();
   useEffect(() => {
-    if (isSuccess) {
+    if (data?.flag == false) {
+      console.log("redireccionando")
       router.replace("/");
     }
-  }, [isSuccess, router]);
+  }, [data, router]);
   if (isLoading)
     return (
       <div className="w-screen h-screen flex flex-col items-center justify-center">
@@ -28,7 +29,7 @@ const CreateVaccineCneter: NextPage = () => {
         <meta name="description" content="En donde me vacuno" />
       </Head>
       <main className="w-screen h-screen overflow-hidden relative flex">
-        <aside className="bg-red-50 h-full w-[360px] px-6 py-3">
+        <aside className="hidden sm:block bg-red-50 h-full w-[360px] px-6 py-3">
           <Image alt="endondemevacuno" width={64} height={96} src="/icon.svg" />
           <h2 className="mt-6 mb-2 font-medium text-3xl">Bienvenido Raul!</h2>
           <p className="text-gray-500">

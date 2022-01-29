@@ -38,7 +38,7 @@ export default function LocationSection({
         label="Dirección"
         className="mb-4"
       />
-      <div className="flex gap-5 items-center">
+      <div className="flex gap-5 sm:items-center flex-col sm:flex-row">
         <Field
           placeholder="Código DIRIS de su centro"
           input={diris}

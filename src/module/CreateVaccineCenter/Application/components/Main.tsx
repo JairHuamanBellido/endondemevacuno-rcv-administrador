@@ -30,8 +30,8 @@ export default function RegisterVaccineCenterContainer() {
   }, [isSuccess]);
 
   return (
-    <section className="py-16 px-40 w-[calc(100vw_-_360px)] h-full relative overflow-auto">
-      <h1 className="text-3xl font-bold">Registro del centro de vacunación</h1>
+    <section className="xs:w-screen px-8 py-8  lg:py-16 lg:px-40 md:w-[calc(100vw_-_360px)] h-full relative overflow-auto">
+      <h1 className="xs:text-xl sm:text-3xl font-bold">Registro del centro de vacunación</h1>
       <Stepper stepperOptions={stepperOptions} />
       <form onSubmit={handleSubmit(onSubmit)}>
         {isCurrentContainer("Información") && (

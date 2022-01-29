@@ -12,7 +12,7 @@ interface Props extends HtmlHTMLAttributes<HTMLElement> {
   hourStart: UseFormRegisterReturn;
   hourEnd: UseFormRegisterReturn;
   watch: UseFormWatch<CreateVaccineCenter>;
-  onClickNext(label: string,isCompleted?:boolean): void;
+  onClickNext(label: string, isCompleted?: boolean): void;
 }
 
 export default function InformaticonSection({
@@ -36,15 +36,15 @@ export default function InformaticonSection({
         input={nameInput}
         label="Nombre"
       />
-      <div className="flex items-center mt-6 mb-12">
-        <div className="mr-4">
+      <div className="flex sm:flex-row sm:items-center mt-6 mb-12  flex-col">
+        <div className="sm:mr-4">
           <Field
             placeholder="09:00"
             input={hourStart}
             label="Horario de apertura"
           />
         </div>
-        <div>
+        <div className="mt-6 sm:mt-0">
           <Field placeholder="18:00" input={hourEnd} label="Hora de cierre" />
         </div>
       </div>
