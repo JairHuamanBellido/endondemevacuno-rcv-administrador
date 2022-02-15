@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Spinner } from "../../../../shared";
 import tailwindCssBuilder from "../../../../utils/tailwindCssBuilder/tailwindCssBuilder";
@@ -11,16 +10,11 @@ import DetailInformation from "./DetailInformation";
 export default function InformationSection() {
   const { data, isLoading } = useGetVaccineCenter();
 
-  const { isEdit, onClickCancel, onClickEdit,setIsEdit } = useConfiguration();
+  const { isEdit, onClickCancel, onClickEdit, setIsEdit } = useConfiguration();
 
-  const { register,  getValues } = useForm<UpdateVaccineCenter>();
+  const { register, getValues } = useForm<UpdateVaccineCenter>();
 
-  const {
-    mutate,
-    isLoading: loadingSave,
-    isSuccess,
-    isError,
-  } = useUpdateVaccineCenter();
+  const { mutate, isLoading: loadingSave } = useUpdateVaccineCenter();
   const onClickSave = () => {
     if (data !== undefined) {
       mutate({
@@ -28,8 +22,7 @@ export default function InformationSection() {
         id: data.id,
         startHour: getValues("startHour"),
       });
-      setIsEdit(false)
-      
+      setIsEdit(false);
     }
   };
   if (data !== undefined && !isLoading)
@@ -74,7 +67,10 @@ export default function InformationSection() {
           <div className="flex items-center">
             {!loadingSave && (
               <>
-                <button onClick={onClickSave} className="bg-primary mr-4 rounded text-white p-[10px]">
+                <button
+                  onClick={onClickSave}
+                  className="bg-primary mr-4 rounded text-white p-[10px]"
+                >
                   Guardar cambios
                 </button>
                 <button
