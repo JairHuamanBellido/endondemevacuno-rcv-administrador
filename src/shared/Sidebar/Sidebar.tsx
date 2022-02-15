@@ -1,25 +1,9 @@
 import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { HtmlHTMLAttributes } from "react";
-import { ConfigurationIcon, DashboardIcon } from "..";
 import ListNavigation from "../ListNavigation/ListNavigation";
-const defaultTheme = require("tailwindcss/defaultTheme");
 
-interface Props extends HtmlHTMLAttributes<HTMLElement> {}
-
-const Links = [
-  { id: 1, path: "/", label: "Dashboard", icon: DashboardIcon },
-  {
-    id: 2,
-    path: "/configuration",
-    label: "Configuración",
-    icon: ConfigurationIcon,
-  },
-];
-export default function Sidebar({ ...props }: Props) {
+export default function Sidebar() {
   return (
-    <aside className="hidden md:w-60 md:block white  py-8 px-6 h-screen">
+    <aside className="hidden md:w-60 md:block white border border-r border-slate-200  py-8 px-6 h-screen">
       <Image
         width={64}
         height={64}

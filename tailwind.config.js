@@ -12,7 +12,8 @@ module.exports = {
     colors: {
       ...colors,
       'primary': '#FF1A59',
-      'text-default': '#38405F'
+      'text-default': '#38405F',
+      'text-secondary': '#666B81'
     },
     extend: {
       fontFamily: {

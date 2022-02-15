@@ -27,6 +27,7 @@ export default function ListNavigation({ ...props }: Props) {
   const dynamicIconStyle = (path: string) => {
     return path === router.pathname ? "#fff" : "#334155";
   };
+
   return (
     <ul>
       {Links.map((e) => (

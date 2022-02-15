@@ -1,6 +1,8 @@
 import type { NextPage } from "next";
 import { Sidebar } from "../src/shared";
+import Header from "../src/module/Configuration/Application/components/Header";
 import MenuMobile from "../src/shared/MenuMobile/MenuMobile";
+import InformationSection from "../src/module/Configuration/Application/components/InformationSection";
 
 const Configuration: NextPage = () => {
   return (
@@ -9,7 +11,8 @@ const Configuration: NextPage = () => {
       {/*  It display when is low than 768px */}
       <MenuMobile />
       <main className="pt-20 px-8">
-        <h1>Hola soy el configuration</h1>
+        <Header />
+        <InformationSection />
       </main>
     </div>
   );
