@@ -4,7 +4,7 @@ import { UpdateVaccineCenter } from "../../Domain/model/UpdateVaccineCenter.mode
 import { UpdateVaccineCenterService } from "../../Domain/services/UpdateVaccineCenterService";
 
 export default function useUpdateVaccineCenter() {
-  const mutation = useMutation<any, HttpError, UpdateVaccineCenter>((payload) =>
+  const mutation = useMutation<any, HttpError, Partial<UpdateVaccineCenter>>((payload) =>
     UpdateVaccineCenterService.execute(payload)
   );
 

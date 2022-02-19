@@ -12,7 +12,9 @@ const Configuration: NextPage = () => {
       <MenuMobile />
       <main className="pt-20 px-8">
         <Header />
-        <InformationSection />
+        <div className="flex">
+          <InformationSection />
+        </div>
       </main>
     </div>
   );

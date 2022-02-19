@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Spinner } from "../../../../shared";
 import tailwindCssBuilder from "../../../../utils/tailwindCssBuilder/tailwindCssBuilder";
@@ -8,13 +9,20 @@ import useUpdateVaccineCenter from "../hooks/useUpdateVaccineCenter";
 import DetailInformation from "./DetailInformation";
 
 export default function InformationSection() {
-  const { data, isLoading } = useGetVaccineCenter();
-
+  const { data, isLoading, refetch } = useGetVaccineCenter();
   const { isEdit, onClickCancel, onClickEdit, setIsEdit } = useConfiguration();
-
   const { register, getValues } = useForm<UpdateVaccineCenter>();
+  const {
+    mutate,
+    isLoading: loadingSave,
+    isSuccess,
+  } = useUpdateVaccineCenter();
 
-  const { mutate, isLoading: loadingSave } = useUpdateVaccineCenter();
+  useEffect(() => {
+    if (isSuccess) {
+      refetch();
+    }
+  }, [isSuccess, refetch]);
   const onClickSave = () => {
     if (data !== undefined) {
       mutate({
@@ -23,6 +31,15 @@ export default function InformationSection() {
         startHour: getValues("startHour"),
       });
       setIsEdit(false);
+    }
+  };
+
+  const onClickAvailability = () => {
+    if (data !== undefined) {
+      mutate({
+        id: data.id,
+        isAvailable: !data.isAvailable,
+      });
     }
   };
   if (data !== undefined && !isLoading)
@@ -82,6 +99,31 @@ export default function InformationSection() {
               </>
             )}
             {loadingSave && <Spinner />}
+          </div>
+        )}
+
+        {!isEdit && (
+          <div className="pt-4  border-t border-t-slate-200">
+            {!loadingSave ? (
+              <>
+                {" "}
+                <p className="text-sm text-text-secondary">
+                  ¿Desea{" "}
+                  <strong>
+                    {data.isAvailable ? "deshabilitar" : "habilitar"}
+                  </strong>{" "}
+                  el centro de vacunación?
+                </p>
+                <button
+                  onClick={onClickAvailability}
+                  className="bg-primary rounded mt-4 text-white p-[10px]"
+                >
+                  {data.isAvailable ? "Deshabilitar" : "Habilitar"}
+                </button>
+              </>
+            ) : (
+              <Spinner />
+            )}
           </div>
         )}
       </section>

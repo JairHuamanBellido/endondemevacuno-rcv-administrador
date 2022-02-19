@@ -25,7 +25,7 @@ export class HttpRestApiVaccineCenter {
     return data;
   }
 
-  public static async updateVaccineCenter(vaccineCenter: UpdateVaccineCenter) {
+  public static async updateVaccineCenter(vaccineCenter: Partial<UpdateVaccineCenter>) {
     const { data } = await HttRestApiWithInterceptor.put<VaccineCenter>(
       "/vaccine-center",
       { ...vaccineCenter }

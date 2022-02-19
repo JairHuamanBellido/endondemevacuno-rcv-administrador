@@ -4,7 +4,7 @@ import { UpdateVaccineCenter } from "../model/UpdateVaccineCenter.model";
 
 export class UpdateVaccineCenterService {
   public static async execute(
-    vaccineCenter: UpdateVaccineCenter
+    vaccineCenter: Partial<UpdateVaccineCenter>
   ): Promise<VaccineCenter> {
     return await HttpRestApiVaccineCenter.updateVaccineCenter(vaccineCenter);
   }
