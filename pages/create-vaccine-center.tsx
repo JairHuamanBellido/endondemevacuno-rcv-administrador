@@ -10,8 +10,7 @@ const CreateVaccineCneter: NextPage = () => {
   const { isLoading, data } = useIsValidForCreate();
   const router = useRouter();
   useEffect(() => {
-    if (data?.flag == false) {
-      console.log("redireccionando")
+    if (data?.flag === false) {
       router.replace("/");
     }
   }, [data, router]);

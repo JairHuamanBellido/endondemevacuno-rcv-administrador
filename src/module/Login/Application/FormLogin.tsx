@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { HttpError } from "../../../core/types/HttpError";
 import { ErrorContainer, Spinner } from "../../../shared";
@@ -9,17 +9,26 @@ import useAuthentication from "./hooks/useAuthentication";
 export default function FormLogin() {
   const { register, handleSubmit } =
     useForm<HttpRestApiAuthenticationRequest>();
-  const { mutate, isLoading, isError, isSuccess, error } = useAuthentication();
-
+  const { mutate, isLoading, isError, error } = useAuthentication();
+  const [isChecked, setIsCheked] = useState<boolean>(false);
   const router = useRouter();
 
-  useEffect(() => {
-    if (isSuccess) {
-      router.replace("/create-vaccine-center");
-    }
-  }, [isSuccess, router]);
   const onSubmit = (data: HttpRestApiAuthenticationRequest) => {
-    mutate(data);
+    mutate(data, {
+      onSuccess: (e) => {
+        if (isChecked) {
+          localStorage.setItem("token", e.token);
+          localStorage.setItem("userId", e.userId);
+          localStorage.setItem("isRemember", "true");
+        } else {
+          sessionStorage.setItem("token", e.token);
+          sessionStorage.setItem("userId", e.userId);
+          localStorage.setItem("isRemember", "false");
+        }
+
+        router.replace("/create-vaccine-center");
+      },
+    });
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -36,7 +45,12 @@ export default function FormLogin() {
       />
       <div className="forgot-password">
         <label className="checkbox-container">
-          <input type="checkbox" />
+          <input
+            onChange={() => {
+              setIsCheked(!isChecked);
+            }}
+            type="checkbox"
+          />
           <span className="checkmark"></span>
           Recordar sesión
         </label>
