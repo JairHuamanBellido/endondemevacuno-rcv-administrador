@@ -14,7 +14,7 @@ export default function MenuMobile({ ...props }: Props) {
   };
 
   return (
-    <nav className=" flex w-full  bg-primary md:hidden h-12 items-center  px-6 absolute top-0 ">
+    <nav className=" flex w-full  bg-primary md:hidden h-12 items-center  px-6 ">
       <div onClick={toggleMenu}>
         {isVisibleMenu ? (
           <CloseIcon color="#fff" />
@@ -24,7 +24,7 @@ export default function MenuMobile({ ...props }: Props) {
       </div>
       {isVisibleMenu && (
         <div
-          className={`w-full transition py-4 overflow-hidden  absolute left-0 px-8 bg-white top-12 h-[calc(100vh_-_48px)]`}
+          className={`w-full z-[1] transition py-4 overflow-hidden  absolute left-0 px-8 bg-white top-12 h-[calc(100vh_-_48px)]`}
         >
           <div className="items-center flex">
             <Image
