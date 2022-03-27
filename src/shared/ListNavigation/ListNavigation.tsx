@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { HtmlHTMLAttributes } from "react";
 import { ConfigurationIcon, DashboardIcon } from "..";
+import InventoryIcon from "../Icon/InventoryIcon";
 
 interface Props extends HtmlHTMLAttributes<HTMLElement> {}
 const Links = [
@@ -11,6 +12,12 @@ const Links = [
     path: "/configuration",
     label: "Configuración",
     icon: ConfigurationIcon,
+  },
+  {
+    id: 3,
+    path: "/inventory",
+    label: "Inventario",
+    icon: InventoryIcon,
   },
 ];
 export default function ListNavigation({ ...props }: Props) {

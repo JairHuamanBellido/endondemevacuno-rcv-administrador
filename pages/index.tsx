@@ -8,7 +8,7 @@ const Home: NextPage = () => {
       <Sidebar />
       {/*  It display when is low than 768px */}
       <MenuMobile />
-      <main className="pt-20 px-8">
+      <main className="pt-20 px-8 w-full md:w-[calc(100vw-240px)]">
         <h1>Hola soy el dashboard</h1>
       </main>
     </div>
