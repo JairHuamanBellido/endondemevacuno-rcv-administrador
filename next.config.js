@@ -3,6 +3,9 @@ const withPWA = require("next-pwa");
 
 module.exports = {
   reactStrictMode: true,
+  env: {
+    GOOGLE_MAP_KEY: process.env.GOOGLE_MAP_KEY,
+  },
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
   },

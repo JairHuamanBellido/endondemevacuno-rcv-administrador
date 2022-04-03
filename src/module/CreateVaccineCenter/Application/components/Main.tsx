@@ -13,7 +13,7 @@ import SuccessCreatedSection from "./SuccessCreatedSection";
 import { useEffect } from "react";
 
 export default function RegisterVaccineCenterContainer() {
-  const { register, watch, handleSubmit } = useForm<CreateVaccineCenter>();
+  const { register, watch, handleSubmit, setValue } = useForm<CreateVaccineCenter>();
   const { data: ubigeos } = useGetAllUbigeo();
   const { mutate, isLoading, isSuccess } = useCreateVaccineCenter();
   const { isCurrentContainer, stepperOptions, onSelectNext } = useStepper();
@@ -33,7 +33,7 @@ export default function RegisterVaccineCenterContainer() {
     <section className="xs:w-screen px-8 py-8  lg:py-16 lg:px-40 md:w-[calc(100vw_-_360px)] h-full relative overflow-auto">
       <h1 className="xs:text-xl sm:text-3xl font-bold">Registro del centro de vacunación</h1>
       <Stepper stepperOptions={stepperOptions} />
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="w-full h-[calc(80%)]" onSubmit={handleSubmit(onSubmit)}>
         {isCurrentContainer("Información") && (
           <InformaticonSection
             watch={watch}
@@ -46,9 +46,11 @@ export default function RegisterVaccineCenterContainer() {
         {isCurrentContainer("Ubicación") && (
           <LocationSection
             watch={watch}
+            setValue={setValue}
             ubigeos={ubigeos as Ubigeo[]}
             ubigeoId={register("ubigeoId")}
             direction={register("direction", { required: true })}
+            localization={register("localization", { required: true })}
             diris={register("diris", { required: true })}
             onSelectBack={onSelectNext}
             onSelectNext={onSelectNext}
