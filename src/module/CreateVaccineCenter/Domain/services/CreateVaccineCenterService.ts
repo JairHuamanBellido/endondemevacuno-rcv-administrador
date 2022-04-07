@@ -12,7 +12,7 @@ export class CreateVaccineCenterService {
       businessHour: `${vaccineCenter.hourStart} - ${vaccineCenter.hourEnd}`,
       direction: vaccineCenter.direction,
       diris: vaccineCenter.diris,
-      localization: "123-123.-123",
+      localization: vaccineCenter.localization,
       name: vaccineCenter.name,
       ubigeoId: vaccineCenter.ubigeoId,
       vaccines: vaccinesSelected,
