@@ -97,6 +97,16 @@ export default function InformationSection() {
   if (data !== undefined && !isLoading)
     return (
       <>
+        <Modal
+          action={data.isAvailable ? "Deshabilitar" : "Habilitar"}
+          description={`¿Desea ${
+            data.isAvailable ? "Deshabilitar" : "Habilitar"
+          } el centro de vacunación?`}
+          isVisible={visibleModal}
+          onCancel={() => setVisibleModal(false)}
+          onSubmit={onClickAvailability}
+          isLoading={loadingSave}
+        />
         <section className="w-full h-full">
           <div className={tailwindCssBuilder("flex items-center", "my-8")}>
             <h3
@@ -175,7 +185,9 @@ export default function InformationSection() {
                         el centro de vacunación?
                       </p>
                       <button
-                        onClick={onClickAvailability}
+                        onClick={() => {
+                          setVisibleModal(true);
+                        }}
                         className="bg-primary rounded mt-4 text-white p-[10px]"
                       >
                         {data.isAvailable ? "Deshabilitar" : "Habilitar"}
