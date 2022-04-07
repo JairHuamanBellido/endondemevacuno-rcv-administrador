@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Spinner } from "../../../../shared";
-import Modal from "../../../../shared/Modal/Modal";
 import GoogleMap from "../../../../shared/Map/Map";
 import tailwindCssBuilder from "../../../../utils/tailwindCssBuilder/tailwindCssBuilder";
 import { UpdateVaccineCenter } from "../../Domain/model/UpdateVaccineCenter.model";
@@ -96,115 +95,96 @@ export default function InformationSection() {
   };
   if (data !== undefined && !isLoading)
     return (
-      <>
-        <Modal
-          action={data.isAvailable ? "Deshabilitar" : "Habilitar"}
-          description={`¿Desea ${
-            data.isAvailable ? "Deshabilitar" : "Habilitar"
-          } el centro de vacunación?`}
-          isVisible={visibleModal}
-          onCancel={() => setVisibleModal(false)}
-          onSubmit={onClickAvailability}
-          isLoading={loadingSave}
-        />
-        <section className="w-full h-full">
-          <div className={tailwindCssBuilder("flex items-center", "my-8")}>
-            <h3
+      <section className="w-full h-full">
+        <div className={tailwindCssBuilder("flex items-center", "my-8")}>
+          <h3
+            className={tailwindCssBuilder(
+              "text-xl font-medium text-text-default mr-7"
+            )}
+          >
+            Información
+          </h3>
+          {!isEdit && (
+            <button
+              onClick={onClickEdit}
               className={tailwindCssBuilder(
                 "text-xl font-medium text-text-default mr-7"
               )}
             >
-              Información
-            </h3>
-            {!isEdit && (
-              <button
-                onClick={onClickEdit}
-                className={tailwindCssBuilder(
-                  "p-[10px] bg-[#EBEBEB] rounded text-text-secondary"
+              Editar
+            </button>
+          )}
+        </div>
+        <div className="flex w-full h-full">
+          <div className="w-2/4 mr-20">
+            <DetailInformation label="Nombre" value={data.name} />
+            <DetailInformation label="Dirección" value={data.direction} />
+            <DetailInformation label="Distrito" value={data.ubigeo.district} />
+            <DetailInformation
+              multiple
+              editable={isEdit}
+              inputsProps={[
+                register("startHour", {
+                  value: data.businessHour.split(" ")[0],
+                }),
+                register("endHour", { value: data.businessHour.split(" ")[2] }),
+              ]}
+              label="Horario de atención"
+              value={data.businessHour}
+            />
+            <DetailInformation label="DIRIS" value={data.diris} />
+            {isEdit && (
+              <div className="flex items-center">
+                {!loadingSave && (
+                  <>
+                    <button
+                      onClick={onClickSave}
+                      className="bg-primary mr-4 rounded text-white p-[10px]"
+                    >
+                      Guardar cambios
+                    </button>
+                    <button
+                      onClick={onClickCancel}
+                      className="p-[10px] rounded text-text-secondary"
+                    >
+                      Cancelar
+                    </button>
+                  </>
                 )}
-              >
-                Editar
-              </button>
+                {loadingSave && <Spinner />}
+              </div>
+            )}
+
+            {!isEdit && (
+              <div className="pt-4  border-t border-t-slate-200">
+                {!loadingSave ? (
+                  <>
+                    {" "}
+                    <p className="text-sm text-text-secondary">
+                      ¿Desea{" "}
+                      <strong>
+                        {data.isAvailable ? "deshabilitar" : "habilitar"}
+                      </strong>{" "}
+                      el centro de vacunación?
+                    </p>
+                    <button
+                      onClick={onClickAvailability}
+                      className="bg-primary rounded mt-4 text-white p-[10px]"
+                    >
+                      {data.isAvailable ? "Deshabilitar" : "Habilitar"}
+                    </button>
+                  </>
+                ) : (
+                  <Spinner />
+                )}
+              </div>
             )}
           </div>
-          <div className="flex w-full h-full">
-            <div className="w-2/4 mr-20">
-              <DetailInformation label="Nombre" value={data.name} />
-              <DetailInformation label="Dirección" value={data.direction} />
-              <DetailInformation
-                label="Distrito"
-                value={data.ubigeo.district}
-              />
-              <DetailInformation
-                multiple
-                editable={isEdit}
-                inputsProps={[
-                  register("startHour", {
-                    value: data.businessHour.split(" ")[0],
-                  }),
-                  register("endHour", {
-                    value: data.businessHour.split(" ")[2],
-                  }),
-                ]}
-                label="Horario de atención"
-                value={data.businessHour}
-              />
-              <DetailInformation label="DIRIS" value={data.diris} />
-              {isEdit && (
-                <div className="flex items-center">
-                  {!loadingSave && (
-                    <>
-                      <button
-                        onClick={onClickSave}
-                        className="bg-primary mr-4 rounded text-white p-[10px]"
-                      >
-                        Guardar cambios
-                      </button>
-                      <button
-                        onClick={onClickCancel}
-                        className="p-[10px] rounded text-text-secondary"
-                      >
-                        Cancelar
-                      </button>
-                    </>
-                  )}
-                  {loadingSave && <Spinner />}
-                </div>
-              )}
-
-              {!isEdit && (
-                <div className="pt-4  border-t border-t-slate-200">
-                  {!loadingSave ? (
-                    <>
-                      {" "}
-                      <p className="text-sm text-text-secondary">
-                        ¿Desea{" "}
-                        <strong>
-                          {data.isAvailable ? "deshabilitar" : "habilitar"}
-                        </strong>{" "}
-                        el centro de vacunación?
-                      </p>
-                      <button
-                        onClick={() => {
-                          setVisibleModal(true);
-                        }}
-                        className="bg-primary rounded mt-4 text-white p-[10px]"
-                      >
-                        {data.isAvailable ? "Deshabilitar" : "Habilitar"}
-                      </button>
-                    </>
-                  ) : (
-                    <Spinner />
-                  )}
-                </div>
-              )}
-            </div>
-            <div className="w-full h-4/4">
-              <GoogleMap coordinates={data.localization} />
-            </div>
+          <div className="w-full h-4/4">
+            <GoogleMap coordinates={data.localization} />
           </div>
-        </section>
-      </>
+        </div>
+      </section>
     );
 
   return (
