@@ -24,11 +24,16 @@ export default function InformaticonSection({
   ...props
 }: Props) {
   const [isDisabled, setDisabled] = useState<boolean>();
-  useEffect(() => {
-    watch((value) => {
-      setDisabled((value.name && value.hourEnd && value.hourStart) === "");
-    });
-  }, []);
+  const {
+    hourStart: hourStartWatch,
+    name: nameWatch,
+    hourEnd: hourEndWatch,
+  } = watch();
+  // useEffect(() => {
+  //   watch((value) => {
+  //     setDisabled((value.name && value.hourEnd && value.hourStart) === "");
+  //   });
+  // }, [watch]);
   return (
     <div {...props}>
       <Field
@@ -53,7 +58,12 @@ export default function InformaticonSection({
           onClick={() => {
             onClickNext("Ubicación");
           }}
-          disabled={isDisabled}
+          disabled={
+            hourStartWatch === "" ||
+            nameWatch === "" ||
+            hourEndWatch === "" ||
+            nameWatch === undefined
+          }
           type="button"
           className="h-11 px-6 rounded bg-primary text-white"
         >

@@ -3,11 +3,13 @@ import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import useGetPersonalInformation from "../src/module/Configuration/Application/hooks/useGetPersonalinformation";
 import Container from "../src/module/CreateVaccineCenter/Application/components/Main";
 import useIsValidForCreate from "../src/module/CreateVaccineCenter/Application/hooks/useIsValidForCreate";
 import { Spinner } from "../src/shared";
 const CreateVaccineCneter: NextPage = () => {
   const { isLoading, data } = useIsValidForCreate();
+  const { data: responsable } = useGetPersonalInformation();
   const router = useRouter();
   useEffect(() => {
     if (data?.flag === false) {
@@ -30,7 +32,9 @@ const CreateVaccineCneter: NextPage = () => {
       <main className="w-screen h-screen overflow-hidden relative flex">
         <aside className="hidden sm:block bg-red-50 h-full w-[360px] px-6 py-3">
           <Image alt="endondemevacuno" width={64} height={96} src="/icon.svg" />
-          <h2 className="mt-6 mb-2 font-medium text-3xl">Bienvenido Raul!</h2>
+          <h2 className="mt-6 mb-2 font-medium text-3xl">
+            Bienvenido {responsable?.name}
+          </h2>
           <p className="text-gray-500">
             Completa todos los campos para el registro de tu centro de
             vacunación

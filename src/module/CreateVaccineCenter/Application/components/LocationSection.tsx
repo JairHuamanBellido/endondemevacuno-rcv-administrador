@@ -24,12 +24,7 @@ export default function LocationSection({
   onSelectNext,
   ...props
 }: Props) {
-  const [isDisabled, setDisabled] = useState<boolean>();
-  useEffect(() => {
-    watch((value) => {
-      setDisabled((value.direction && value.diris) === "");
-    });
-  }, [watch]);
+  const { direction: directionWatch, diris: dirisWatch } = watch();
   return (
     <div {...props}>
       <Field
@@ -70,7 +65,11 @@ export default function LocationSection({
           Atrás
         </button>
         <button
-          disabled={isDisabled}
+          disabled={
+            directionWatch === "" ||
+            dirisWatch === "" ||
+            directionWatch === undefined
+          }
           onClick={() => {
             onSelectNext("Vacunas");
           }}

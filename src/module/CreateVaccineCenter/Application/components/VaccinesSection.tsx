@@ -68,6 +68,7 @@ export default function VaccinesSection({
               Atrás
             </button>
             <button
+              disabled={vaccinesSelected.length === 0}
               type="submit"
               className="h-11 px-6 ml-4 bg-primary text-white cursor-pointer rounded"
             >
