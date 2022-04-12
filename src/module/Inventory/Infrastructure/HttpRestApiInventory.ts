@@ -22,9 +22,12 @@ export class HttpRestApiInventory {
     return data;
   }
 
-  public static async removeInventory(inventoryId: string): Promise<boolean> {
+  public static async removeInventory(
+    vaccineCenterId: string,
+    inventoryId: string
+  ): Promise<boolean> {
     const { data } = await HttRestApiWithInterceptor.delete<boolean>(
-      `/vaccine-center/inventory/${inventoryId}`
+      `/vaccine-center/${vaccineCenterId}/inventory/${inventoryId}`
     );
     return data;
   }
