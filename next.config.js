@@ -2,7 +2,7 @@ const path = require("path");
 const withPWA = require("next-pwa");
 
 module.exports = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   env: {
     GOOGLE_MAP_KEY: process.env.GOOGLE_MAP_KEY,
   },
