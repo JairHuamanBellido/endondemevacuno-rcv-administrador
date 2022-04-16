@@ -7,7 +7,7 @@ const queryClient = new QueryClient({
     queries: { refetchOnWindowFocus: false },
   },
 });
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }) {
   return (
     <>
       <QueryClientProvider client={queryClient}>
