@@ -21,7 +21,7 @@ const Configuration: NextPage = () => {
       <Sidebar />
       {/*  It display when is low than 768px */}
       <MenuMobile />
-      <main className="pt-6 md:pt-20 px-8 w-full md:w-[calc(100vw-240px)]">
+      <main className="pt-6 md:pt-20 px-4 w-full md:w-[calc(100vw-240px)]">
         <Header
           title="Configuración"
           description="Gestiona la información de tu centro de vacunación"
