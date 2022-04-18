@@ -120,15 +120,15 @@ export default function InformationSection() {
               <button
                 onClick={onClickEdit}
                 className={tailwindCssBuilder(
-                  "text-xl font-medium text-text-default mr-7"
+                  "text-base bg-gray-200 px-4 py-2 font-medium text-text-default mr-7"
                 )}
               >
                 Editar
               </button>
             )}
           </div>
-          <div className="flex w-full h-full">
-            <div className="w-2/4 mr-20">
+          <div className="flex-col-reverse flex lg:flex-row w-full h-full">
+            <div className="w-full mb-4 lg:mb-0 lg:w-2/4 mr-20">
               <DetailInformation label="Nombre" value={data.name} />
               <DetailInformation label="Dirección" value={data.direction} />
               <DetailInformation
@@ -185,7 +185,7 @@ export default function InformationSection() {
                         el centro de vacunación?
                       </p>
                       <button
-                        onClick={() =>  setVisibleModal(true)}
+                        onClick={() => setVisibleModal(true)}
                         className="bg-primary rounded mt-4 text-white p-[10px]"
                       >
                         {data.isAvailable ? "Deshabilitar" : "Habilitar"}
@@ -197,7 +197,7 @@ export default function InformationSection() {
                 </div>
               )}
             </div>
-            <div className="w-full h-4/4">
+            <div className="w-full h-[400px] mb-4  lg:h-4/4 lg:mb-0">
               <GoogleMap coordinates={data.localization} />
             </div>
           </div>

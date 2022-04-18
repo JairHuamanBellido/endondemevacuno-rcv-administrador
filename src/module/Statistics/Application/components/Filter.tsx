@@ -11,7 +11,7 @@ export default function Filter({ currentFilter, onClickFilter }: Props) {
     currentFilter === filter;
   return (
     <div className="flex items-center">
-      <p className="text-text-default font-bold mr-8">Filtros:</p>
+      <p className="text-text-default font-bold mr-2 md:mr-8">Filtros:</p>
       {filterMap.map((e, i) => (
         <div
           onClick={() => {

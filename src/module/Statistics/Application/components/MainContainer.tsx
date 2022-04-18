@@ -28,6 +28,7 @@ export default function StatisticsMainConatiner() {
           <Filter currentFilter={currentFilter} onClickFilter={onClickFilter} />
         </div>
         <LineChart
+          currentFilter={currentFilter}
           labels={
             (data as InflowByPeriod[]).length > 0
               ? (data as InflowByPeriod[]).map((e) => Object.keys(e)[0])

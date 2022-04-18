@@ -16,6 +16,7 @@ export default function CirclePoints(props: Props) {
           fill={borderColor}
           stroke={borderColor}
           strokeWidth="2"
+          className="hidden md:block"
           cx={spaceBetweenPoints * i + x}
           cy={getYPoint(values[i])}
         />

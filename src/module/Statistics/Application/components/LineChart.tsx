@@ -18,8 +18,9 @@ function round(value: number, precision?: number) {
 interface Props {
   values: number[];
   labels: string[];
+  currentFilter: string;
 }
-export default function LineChart({ labels, values }: Props) {
+export default function LineChart({ labels, values, currentFilter }: Props) {
   const [track, setTrack] = useState({ x: 0, y: 0, isHover: false });
   const [path, setPath] = useState<string>("");
   const [valueHover, setValueHover] = useState<number>(0);
@@ -130,6 +131,7 @@ export default function LineChart({ labels, values }: Props) {
             yStartPoint={YstartPoint}
             numberOfLines={values.length}
             labels={labels}
+            filter={currentFilter}
           />
           <VerticalLabels
             heightContainer={heightContainer}

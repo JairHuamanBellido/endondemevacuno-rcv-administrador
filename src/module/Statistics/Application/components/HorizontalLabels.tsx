@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import classesIf from "../../../../utils/dynamicClasses/classesIf";
+import tailwindCssBuilder from "../../../../utils/tailwindCssBuilder/tailwindCssBuilder";
 
 interface IProps {
   distanceBetweenLines: number;
@@ -7,6 +8,7 @@ interface IProps {
   yStartPoint: number;
   numberOfLines: number;
   labels: string[];
+  filter: string;
 }
 
 export default function HorizontaLabels(props: IProps) {
@@ -16,16 +18,22 @@ export default function HorizontaLabels(props: IProps) {
     yStartPoint,
     heightContainer,
     labels,
-    numberOfLines,
+    filter,
   } = props;
 
   return (
     <>
-      <g className="vertical-lines">
+      <g y={heightContainer + yStartPoint + 25} className="horizonalLabels">
         {labels.map((label, i) => (
           <text
+            className={tailwindCssBuilder(
+              classesIf(filter === "Hora", "labels-hour"),
+              classesIf(filter === "Hoy" && labels.length > 5, "labels-today"),
+              classesIf(filter === "Semana", "labels-week"),
+              classesIf(filter === "Mes", "labels-month")
+            )}
             fontSize={12}
-            x={distanceBetweenLines * i + xStartPoint - 12}
+            x={distanceBetweenLines * i + xStartPoint - 4}
             y={heightContainer + yStartPoint + 25}
             key={`label-horizontal-${i}`}
           >

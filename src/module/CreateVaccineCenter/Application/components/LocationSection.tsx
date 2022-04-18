@@ -1,5 +1,9 @@
 import { HtmlHTMLAttributes, useEffect, useState } from "react";
-import { UseFormRegisterReturn, UseFormSetValue, UseFormWatch } from "react-hook-form";
+import {
+  UseFormRegisterReturn,
+  UseFormSetValue,
+  UseFormWatch,
+} from "react-hook-form";
 import { Ubigeo } from "../../../Ubigeo/Domain/model/Ubigeo";
 import { CreateVaccineCenter } from "../../Domain/model/CreateVaccineCenter";
 import Field from "../../../../shared/Field/Field";
@@ -32,8 +36,8 @@ export default function LocationSection({
   const [isDisabled, setDisabled] = useState<boolean>();
 
   const setLocalitation = (value: string) => {
-    setValue('localization', value);
-  }
+    setValue("localization", value);
+  };
 
   useEffect(() => {
     watch((value) => {
@@ -41,8 +45,8 @@ export default function LocationSection({
     });
   }, [watch]);
   return (
-    <div {...props} className="flex w-full h-full">
-      <div className="w-2/4 h-full">
+    <div {...props} className="flex-col-reverse flex lg:flex-row w-full h-full">
+      <div className="w-full mb-4 lg:mb-0 lg:w-2/4 mr-20">
         <Field
           placeholder="Ingrese su direción"
           input={direction}
@@ -92,10 +96,9 @@ export default function LocationSection({
           </button>
         </div>
       </div>
-      <div className="h-full w-2/4">
+      <div className="w-full h-[400px] mb-4  lg:h-4/4 lg:mb-0">
         <GoogleMap isEditable={true} onChangeLocalization={setLocalitation} />
       </div>
-
     </div>
   );
 }

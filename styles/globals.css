@@ -64,3 +64,42 @@
   font-weight: 300;
   opacity: 0.6;
 }
+
+@media (max-width: 1024px) {
+  .labels-month,
+  .labels-hour {
+    display: none;
+  }
+  .labels-month:nth-child(6n) {
+    display: initial;
+  }
+
+  .labels-hour:nth-child(3n) {
+    display: initial;
+  }
+
+  .horizonalLabels > text:first-child,
+  .horizonalLabels > text:last-child {
+    display: initial;
+  }
+}
+
+@media (max-width: 768px) {
+  .labels-today {
+    display: none;
+  }
+  .horizonalLabels {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .labels-today:nth-child(3n) {
+    display: initial;
+  }
+  .labels-hour:nth-child(3n) {
+    display: none;
+  }
+  .labels-hour:nth-child(4n) {
+    display: initial;
+  }
+}
