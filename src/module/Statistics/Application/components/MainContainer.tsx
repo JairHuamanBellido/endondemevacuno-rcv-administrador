@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Spinner } from "../../../../shared";
+import useGetVaccineCenter from "../../../Configuration/Application/hooks/useGetVaccineCenter";
 import { InflowByPeriod } from "../../Domain/model/InflowByPeriod";
 import useGetInflow from "../hooks/useGetInflow";
 import Filter from "./Filter";
@@ -8,6 +9,12 @@ import LineChart from "./LineChart";
 export default function StatisticsMainConatiner() {
   const [currentFilter, setCurrentFilter] = useState<string>("Hoy");
   const { data, refetch, isLoading, isFetching } = useGetInflow(currentFilter);
+  const { data: vaccineCenter } = useGetVaccineCenter();
+
+  const startHour = vaccineCenter?.businessHour
+    .split("-")[0]
+    .slice(0, -3) as string;
+
   const onClickFilter = (filter: string) => {
     setCurrentFilter(filter);
   };
@@ -21,12 +28,15 @@ export default function StatisticsMainConatiner() {
           <Filter currentFilter={currentFilter} onClickFilter={onClickFilter} />
         </div>
         <LineChart
-          labels={(data as InflowByPeriod[]).map((e) => Object.keys(e)[0])}
+          labels={
+            (data as InflowByPeriod[]).length > 0
+              ? (data as InflowByPeriod[]).map((e) => Object.keys(e)[0])
+              : [startHour]
+          }
           values={(data as InflowByPeriod[]).map(
             (e) => e[Object.keys(e)[0] as string]
           )}
         />
-        {/* <LineChart labels={["09:30"]} values={[34]} /> */}
       </div>
     );
   }

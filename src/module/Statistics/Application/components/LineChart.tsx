@@ -29,8 +29,6 @@ export default function LineChart({ labels, values }: Props) {
   const [highValueLeftLegend, setHighValueLeftLegend] = useState<number>(-1);
   const ref = useRef<any>();
 
-  console.log({ values, valueHover });
-
   useEffect(() => {
     if (values.length === 1) {
       setSpaceBetweenLine(widthContainer / 2);
@@ -104,17 +102,12 @@ export default function LineChart({ labels, values }: Props) {
       posY - YstartPoint >= 0 &&
       posY < heightContainer + YstartPoint
     ) {
-      console.log(
-        "encontrado",
-        e.clientX - el.getBoundingClientRect().x - XstartPoint
-      );
       setTrack({
         isHover: true,
         x: e.clientX - el.getBoundingClientRect().x - XstartPoint,
         y: e.clientY - el.getBoundingClientRect().y,
       });
     } else {
-      console.log("cambiando");
       setTrack({ ...track, isHover: false });
     }
   };

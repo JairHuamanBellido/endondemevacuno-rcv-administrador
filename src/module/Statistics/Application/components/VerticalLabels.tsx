@@ -48,23 +48,34 @@ export default function VerticalLabels(props: IProps) {
   const [labels, setLabels] = useState<number[]>([]);
 
   useEffect(() => {
-    const maxValue = getMaxValueOfArray(values);
-    if (maxValue !== 0) {
-      const maxValueInBase10 = getMaxValueInBase10(maxValue);
-
-      const frequencyValue = Math.floor(
-        maxValueInBase10 / (lengthVerticalLabels - 1)
-      );
-
-      let valuesLeft = [];
-      for (let i = 0; i < lengthVerticalLabels - 1; ++i) {
-        valuesLeft.push(i * frequencyValue);
+    if (values.length === 0) {
+      let arr = [];
+      for (let i = 0; i < lengthVerticalLabels; i++) {
+        arr.push(i * 4);
       }
-      valuesLeft.push(maxValueInBase10);
-      setLabels(valuesLeft);
-      setHighValueLeftLegend(maxValueInBase10);
-    } else {
-      setHighValueLeftLegend(0);
+      setLabels(arr);
+    }
+  }, [values, lengthVerticalLabels]);
+  useEffect(() => {
+    if (values.length > 0) {
+      const maxValue = getMaxValueOfArray(values);
+      if (maxValue !== 0) {
+        const maxValueInBase10 = getMaxValueInBase10(maxValue);
+
+        const frequencyValue = Math.floor(
+          maxValueInBase10 / (lengthVerticalLabels - 1)
+        );
+
+        let valuesLeft = [];
+        for (let i = 0; i < lengthVerticalLabels - 1; ++i) {
+          valuesLeft.push(i * frequencyValue);
+        }
+        valuesLeft.push(maxValueInBase10);
+        setLabels(valuesLeft);
+        setHighValueLeftLegend(maxValueInBase10);
+      } else {
+        setHighValueLeftLegend(0);
+      }
     }
   }, [values, lengthVerticalLabels, setHighValueLeftLegend]);
 

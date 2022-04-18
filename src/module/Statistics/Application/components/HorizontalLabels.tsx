@@ -9,7 +9,7 @@ interface IProps {
   labels: string[];
 }
 
-export default function VerticaLines(props: IProps) {
+export default function HorizontaLabels(props: IProps) {
   const {
     distanceBetweenLines,
     xStartPoint,
@@ -19,15 +19,6 @@ export default function VerticaLines(props: IProps) {
     numberOfLines,
   } = props;
 
-  const [emptyArr, setEmptyArr] = useState<number[]>([]);
-
-  useEffect(() => {
-    let tempArr = [];
-    for (let i = 0; i < numberOfLines; ++i) {
-      tempArr.push(i);
-    }
-    setEmptyArr(tempArr);
-  }, [numberOfLines]);
   return (
     <>
       <g className="vertical-lines">

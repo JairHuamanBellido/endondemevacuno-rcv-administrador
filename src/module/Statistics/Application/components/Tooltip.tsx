@@ -15,8 +15,8 @@ export default function Tooltip(props: IProps) {
       }}
       className="tooltip"
     >
-      <p className="value">${value}</p>
-      <p className="label">Ventas totales</p>
+      <p className="value">{value || 0}</p>
+      <p className="label">Personas</p>
     </div>
   );
 }
