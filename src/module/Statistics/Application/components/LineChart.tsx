@@ -18,11 +18,20 @@ function round(value: number, precision?: number) {
 interface Props {
   values: number[];
   labels: string[];
+  valuestwo?: number[];
   currentFilter: string;
+  multi?: boolean;
 }
-export default function LineChart({ labels, values, currentFilter }: Props) {
+export default function LineChart({
+  labels,
+  values,
+  currentFilter,
+  valuestwo,
+  multi,
+}: Props) {
   const [track, setTrack] = useState({ x: 0, y: 0, isHover: false });
   const [path, setPath] = useState<string>("");
+  const [path2, setPath2] = useState<string>("");
   const [valueHover, setValueHover] = useState<number>(0);
   const [spaceBetweenLine, setSpaceBetweenLine] = useState<number>(0);
   const [widthContainer, setWidthContainer] = useState<number>(0);
@@ -57,7 +66,29 @@ export default function LineChart({ labels, values, currentFilter }: Props) {
     }
     setPath(M + L);
   }, [values, spaceBetweenLine, highValueLeftLegend]);
+  useEffect(() => {
+    if (valuestwo !== undefined) {
+      const divContainer = ref.current as HTMLElement;
+      const yEndPoint = divContainer.clientHeight - YstartPoint;
+      const heightChartContainer = divContainer.clientHeight - YstartPoint * 2;
 
+      const M = `M ${XstartPoint} ${
+        yEndPoint -
+        heightChartContainer *
+          ((valuestwo as number[])[0] / highValueLeftLegend)
+      }`;
+      let L = "L";
+      for (let index = 1; index < (valuestwo as number[]).length; index++) {
+        const element = (valuestwo as number[])[index];
+        const x = `${spaceBetweenLine * index + XstartPoint}`;
+        const y =
+          yEndPoint - heightChartContainer * (element / highValueLeftLegend);
+        L += `${x},${y},`;
+      }
+
+      setPath2(M + L);
+    }
+  }, [valuestwo, spaceBetweenLine, highValueLeftLegend]);
   useEffect(() => {
     if (values.length > 1) {
       setValueHover(round(track.x / spaceBetweenLine));
@@ -135,21 +166,22 @@ export default function LineChart({ labels, values, currentFilter }: Props) {
           />
           <VerticalLabels
             heightContainer={heightContainer}
-            lengthVerticalLabels={8}
+            lengthVerticalLabels={4}
             values={values}
+            valuestwo={valuestwo}
             xStartPosition={XstartPoint}
             yStartPosition={YstartPoint}
             setHighValueLeftLegend={setHighValueLeftLegend}
           />
           <HorizontalLines
-            numberOfLines={8}
+            numberOfLines={4}
             heightContainer={heightContainer}
             x1={XstartPoint}
             y={YstartPoint}
             x2={widthContainer + XstartPoint + 10}
           />
           {values.length > 1 && <path className="line" d={`${path}`} />}
-
+          {multi && <path className="line2" d={`${path2}`} />}
           {track.isHover && (
             <LineIndicator
               x={
@@ -170,8 +202,22 @@ export default function LineChart({ labels, values, currentFilter }: Props) {
               values.length > 1 ? XstartPoint : widthContainer / 2 + XstartPoint
             }
           />
+          {multi && (
+            <CirclePoints
+              borderColor={"#25CED1"}
+              spaceBetweenPoints={spaceBetweenLine}
+              getYPoint={getYPoint}
+              values={valuestwo as number[]}
+              x={
+                (valuestwo as number[]).length > 1
+                  ? XstartPoint
+                  : widthContainer / 2 + XstartPoint
+              }
+            />
+          )}
         </svg>
         <Tooltip
+          multi={true}
           translateX={
             values.length > 1
               ? valueHover * spaceBetweenLine + XstartPoint - 60
@@ -181,6 +227,11 @@ export default function LineChart({ labels, values, currentFilter }: Props) {
           value={
             values[valueHover] !== undefined
               ? values[valueHover].toString()
+              : ""
+          }
+          valueTwo={
+            (valuestwo as number[])[valueHover] !== undefined
+              ? (valuestwo as number[])[valueHover].toString()
               : ""
           }
           isVisible={track.isHover}

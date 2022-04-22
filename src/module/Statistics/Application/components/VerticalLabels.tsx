@@ -28,6 +28,7 @@ function getMaxValueInBase10(maxValue: number): number {
 
 interface IProps {
   values: number[];
+  valuestwo: number[] | undefined;
   lengthVerticalLabels: number;
   heightContainer: number;
   yStartPosition: number;
@@ -38,6 +39,7 @@ interface IProps {
 export default function VerticalLabels(props: IProps) {
   const {
     values,
+    valuestwo,
     lengthVerticalLabels,
     heightContainer,
     yStartPosition,
@@ -58,7 +60,10 @@ export default function VerticalLabels(props: IProps) {
   }, [values, lengthVerticalLabels]);
   useEffect(() => {
     if (values.length > 0) {
-      const maxValue = getMaxValueOfArray(values);
+      const maxValue = getMaxValueOfArray([
+        ...values,
+        ...(valuestwo !== undefined ? (valuestwo as number[]) : [0]),
+      ]);
       if (maxValue !== 0) {
         const maxValueInBase10 = getMaxValueInBase10(maxValue);
 
