@@ -217,7 +217,7 @@ export default function LineChart({
           )}
         </svg>
         <Tooltip
-          multi={true}
+          multi={multi}
           translateX={
             values.length > 1
               ? valueHover * spaceBetweenLine + XstartPoint - 60
