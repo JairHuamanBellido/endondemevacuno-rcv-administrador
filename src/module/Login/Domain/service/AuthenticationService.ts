@@ -4,8 +4,8 @@ import { HttpRestApiAuthenticationRequest } from "../../Infrastructure/model/Htt
 export class AuthenticationService {
   public static async execute(body: HttpRestApiAuthenticationRequest) {
     const httpResponse = await HttpRestApiAuthentication.login(body);
-    // localStorage.setItem("token", httpResponse.token);
-    // localStorage.setItem("userId", httpResponse.userId);
+    localStorage.setItem("token", httpResponse.token);
+    localStorage.setItem("userId", httpResponse.userId);
     return httpResponse;
   }
 }

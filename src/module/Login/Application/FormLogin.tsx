@@ -16,16 +16,6 @@ export default function FormLogin() {
   const onSubmit = (data: HttpRestApiAuthenticationRequest) => {
     mutate(data, {
       onSuccess: (e) => {
-        if (isChecked) {
-          localStorage.setItem("token", e.token);
-          localStorage.setItem("userId", e.userId);
-          localStorage.setItem("isRemember", "true");
-        } else {
-          sessionStorage.setItem("token", e.token);
-          sessionStorage.setItem("userId", e.userId);
-          localStorage.setItem("isRemember", "false");
-        }
-
         router.replace("/create-vaccine-center");
       },
     });

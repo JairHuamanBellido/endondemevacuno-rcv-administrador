@@ -16,6 +16,7 @@ export class CreateVaccineCenterService {
       name: vaccineCenter.name,
       ubigeoId: vaccineCenter.ubigeoId,
       vaccines: vaccinesSelected,
+      capacity: parseInt(vaccineCenter.capacity),
     };
     return await HttpRestApiVaccineCenter.create(payload);
   }

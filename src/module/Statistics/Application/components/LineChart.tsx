@@ -217,7 +217,6 @@ export default function LineChart({
           )}
         </svg>
         <Tooltip
-          multi={multi}
           translateX={
             values.length > 1
               ? valueHover * spaceBetweenLine + XstartPoint - 60
@@ -227,11 +226,6 @@ export default function LineChart({
           value={
             values[valueHover] !== undefined
               ? values[valueHover].toString()
-              : ""
-          }
-          valueTwo={
-            (valuestwo as number[])[valueHover] !== undefined
-              ? (valuestwo as number[])[valueHover].toString()
               : ""
           }
           isVisible={track.isHover}

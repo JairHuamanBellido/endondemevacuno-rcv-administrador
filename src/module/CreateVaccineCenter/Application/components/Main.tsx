@@ -13,7 +13,8 @@ import SuccessCreatedSection from "./SuccessCreatedSection";
 import { useEffect } from "react";
 
 export default function RegisterVaccineCenterContainer() {
-  const { register, watch, handleSubmit, setValue } = useForm<CreateVaccineCenter>();
+  const { register, watch, handleSubmit, setValue } =
+    useForm<CreateVaccineCenter>();
   const { data: ubigeos } = useGetAllUbigeo();
   const { mutate, isLoading, isSuccess } = useCreateVaccineCenter();
   const { isCurrentContainer, stepperOptions, onSelectNext } = useStepper();
@@ -31,7 +32,9 @@ export default function RegisterVaccineCenterContainer() {
 
   return (
     <section className="xs:w-screen px-8 py-8  lg:py-16 lg:px-40 md:w-[calc(100vw_-_360px)] h-full relative overflow-auto">
-      <h1 className="xs:text-xl sm:text-3xl font-bold">Registro del centro de vacunación</h1>
+      <h1 className="xs:text-xl sm:text-3xl font-bold">
+        Registro del centro de vacunación
+      </h1>
       <Stepper stepperOptions={stepperOptions} />
       <form className="w-full h-[calc(80%)]" onSubmit={handleSubmit(onSubmit)}>
         {isCurrentContainer("Información") && (
@@ -40,6 +43,7 @@ export default function RegisterVaccineCenterContainer() {
             nameInput={register("name", { required: true })}
             hourEnd={register("hourEnd", { required: true })}
             hourStart={register("hourStart", { required: true })}
+            capacity={register("capacity", { required: true })}
             onClickNext={onSelectNext}
           />
         )}
